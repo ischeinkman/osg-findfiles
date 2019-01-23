@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 import os 
 import sys
@@ -5,7 +6,7 @@ import sys
 def append_path(path, dest = None):
     if dest is None:
         print("%s"%(path))
-    elif 'list' in type(dest):
+    elif 'list' in str(type(dest)):
         dest.append(path)
     else:
         dest.write("%s\n"%(path))
