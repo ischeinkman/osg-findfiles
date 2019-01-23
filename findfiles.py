@@ -52,7 +52,7 @@ def main(argv):
         return 
     print("Setting default args")
     
-    dest = None 
+    dest_name = None 
     max_files = 2**32 - 1
     path = os.getcwd()
     print("Parsing flags")
@@ -60,7 +60,7 @@ def main(argv):
         if argv[idx][-3:] == '.py':
             continue
         if argv[idx] == '-o' or argv[idx] == '--out':
-            dest = argv[idx + 1]
+            dest_name = argv[idx + 1]
             idx += 1 
         elif argv[idx] == '-n':
             max_files = int(argv[idx+1])
@@ -68,6 +68,12 @@ def main(argv):
         else:
             path = argv[idx]
     print('Now searching in directory %s'%(path))
+    if dest_name is None:
+        dest = None 
+    elif dest_name == 'list':
+        dest = []
+    else:
+        dest = open(dest_name, 'w')
     found = find_files(dest, path, max_files)
     print('Found %d files.'%(found))
 
